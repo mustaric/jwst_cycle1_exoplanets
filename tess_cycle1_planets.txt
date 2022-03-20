@@ -1,0 +1,18 @@
+#Planets Observed in JWST Cycle1 found by TESS
+GJ 357 b
+HD 15337 b
+HD 15337 c
+L 98-59 c
+L 98-59 d
+LTT 1445 A b
+TOI 260.01
+TOI 776 b
+TOI 776 c
+TOI 836.01
+TOI 836.02
+TOI 178 b
+TOI 178 d
+TOI 178 g
+TOI 421 b
+LHS 3844 b
+WD 1856+534 b
