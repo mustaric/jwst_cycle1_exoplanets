@@ -114,6 +114,8 @@ final_uniqueprev.to_csv(ddir + "transitspec_planet_prop_tess.csv")
 
 
 #%%
+#Read in my tables, which were created above
+#Adjust the parameters for one that is known to be in correct in exo.mast
 final_uniqueprev = pd.read_csv(ddir+"transitspec_planet_prop_tess.csv")
 final_jwstdf = pd.read_csv(ddir + "jwst_cycle1_planet_prop_tess.csv")
 
@@ -311,6 +313,8 @@ plt.savefig(ddir+"cycle1_planets_tesspl.png")
 
 #%%
 #Teq vs Radius and stellar temperature marking the TESS planets.
+#if set ot True it will mark TESS planets
+mark_tess = True
 
 transit = jwstdf[ (jwstdf['obstype'] == "transit")]
 
@@ -325,15 +329,18 @@ Mj = 11.2089
 plt.style.use('dark_background')
 
 plt.figure(figsize=(9.3,8))
-fnt=15
+fnt=16
 
 
 plt.scatter(transit['Tp'], transit['Rp']*Mj, marker='o', c=transit['Teff'], cmap='RdYlBu',
-              label="JWST Transit", alpha=1, s=45)
-plt.colorbar(label='Stellar Teff (K)')
+              label="JWST Transit", alpha=1, s=47)
+cb = plt.colorbar(label='Stellar Teff (K)')
+cb.set_label(label="Stellar Teff (K)", size=fnt)
+cb.ax.tick_params(labelsize=fnt+1)
 
-plt.plot(tess_transit['Tp'], tess_transit['Rp']*Mj, 'D', color="white", 
-             fillstyle='none', ms=10, label="TESS Planet")
+if mark_tess:
+    plt.plot(tess_transit['Tp'], tess_transit['Rp']*Mj, 'D', color="white", 
+             fillstyle='none', ms=11, label="TESS Planet",lw=2)
 
 plt.yscale('log', base=10)
 plt.xscale('log', base=10)
@@ -361,11 +368,15 @@ plt.annotate('Earth', (205,.96), color='cyan', fontsize=fnt)
 plt.plot(110, 11.2, 'o', color='khaki', alpha=1, ms=12)
 plt.annotate('Jupiter', (102,11.1), color='khaki', fontsize=fnt)
 
-plt.savefig(ddir+"cycle1_planets_tess_star.png")
-
+if mark_tess:
+    plt.savefig(ddir+"cycle1_planets_tess_star.png")
+else:
+    plt.savefig(ddir+"cycle1_planets_star.png")
 
 #%%
 #In Incident Flux and TESS planets marked.
+
+mark_tess = False
 
 transit = jwstdf[ (jwstdf['obstype'] == "transit")]
 
@@ -383,12 +394,17 @@ plt.figure(figsize=(11,7))
 fnt=15
 
 
-plt.scatter(transit['inFlux'], transit['Rp']*Mj, marker='o', c=transit['Teff'], cmap='RdYlBu',
-              label="JWST Transit", alpha=1, s=45)
-plt.colorbar(label='Stellar Teff (K)')
+plt.scatter(transit['inFlux'], transit['Rp']*Mj, marker='o', c=transit['Teff'], 
+            cmap='RdYlBu',
+            label="JWST Transit", alpha=1, s=48)
+#plt.colorbar(label='Stellar Teff (K)')
+cb = plt.colorbar(label='Stellar Teff (K)')
+cb.set_label(label="Stellar Teff (K)", size=fnt)
+cb.ax.tick_params(labelsize=fnt+1)
 
-plt.plot(tess_transit['inFlux'], tess_transit['Rp']*Mj, 'D', color="white", 
-             fillstyle='none', ms=10, label="TESS Planet")
+if mark_tess:
+    plt.plot(tess_transit['inFlux'], tess_transit['Rp']*Mj, 'D', color="white", 
+             fillstyle='none', ms=12, label="TESS Planet")
 
 plt.yscale('log', base=10)
 plt.xscale('log', base=10)
@@ -416,8 +432,10 @@ plt.annotate('Earth', (1.1,0.83), color='cyan', fontsize=fnt)
 plt.plot(.037, 11.2, 'o', color='khaki', alpha=1, ms=12)
 plt.annotate('Jupiter', (.05,9.0), color='khaki', fontsize=fnt)
 
-plt.savefig(ddir+"cycle1_planets_tess_influx.png")
-
+if mark_tess:
+    plt.savefig(ddir+"cycle1_planets_tess_influx.png")
+else:
+    plt.savefig(ddir+"cycle1_planets_influx.png")
 #%%
 #In Incident Flux and wihtout TESS planets
 
@@ -434,7 +452,7 @@ Mj = 11.2089
 plt.style.use('dark_background')
 
 plt.figure(figsize=(11,7))
-fnt=15
+fnt=16
 
 
 plt.scatter(transit['inFlux'], transit['Rp']*Mj, marker='o', c=transit['Teff'], cmap='RdYlBu',
