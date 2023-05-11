@@ -119,9 +119,11 @@ final_uniqueprev.to_csv(ddir + "transitspec_planet_prop_tess.csv")
 final_uniqueprev = pd.read_csv(ddir+"transitspec_planet_prop_tess.csv")
 final_jwstdf = pd.read_csv(ddir + "jwst_cycle1_planet_prop_tess.csv")
 
+#HIP 67522 b
 final_jwstdf['a/Rs'].iloc[47] = 11.7
-final_jwstdf['Rs'].iloc[47] = 1.38
-final_jwstdf['Teff'].iloc[47] = 5675
+#final_jwstdf['Rs'].iloc[47] = 1.38
+#final_jwstdf['Teff'].iloc[47] = 5675
+
 
 #%%
 
@@ -237,9 +239,9 @@ plt.savefig(ddir+"cycle1_planets_tess.png")
 
 def is_tess(planet):
     tessplanets = ['HD 15337 c', 'L168-9 c', 'L98-59 c', 'LTT 1445 A b', 'TOI 260.01', 
-                   'TOI 776 b', 'HD 15337 b',
+                   'TOI 776 b', 'HD 15337 b', 'GJ 4102 b'
                    'TOI 776 c', 'TOI 836.01', 'TOI 836.02', 'LTT 1445 A b',
-                   'TOI 178 b', 'TOI 178 d','TOI 178 g','TOI 421 b','TOI 421 b',
+                   'TOI 178 b', 'TOI 178 d','TOI 178 g','TOI 421 b',
                    'LHS 3844 b', 'WD 1856+534 b','HIP 67522 b', 'GJ 486 b',
                    'TOI 741.01', 'GJ 357 b', 'TOI 910.01',
                    'GJ 367 b', 'L 98-59 d', 'LP 791-18 c', 
